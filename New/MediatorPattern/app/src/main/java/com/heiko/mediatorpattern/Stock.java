@@ -6,8 +6,12 @@ package com.heiko.mediatorpattern;
  * @author Heiko
  * @date 2020/4/9 0009
  */
-public class Stock {
+public class Stock extends AbstractColleague {
     private static int COMPUTER_NUMBER = 100;
+
+    public Stock(AbstractMediator _mediator) {
+        super(_mediator);
+    }
 
     //库存增加
     public void increase(int number) {
@@ -28,12 +32,7 @@ public class Stock {
 
     //存货压力大了，就要通知采购人员不要采购，销售人员要尽快销售
     public void clearStock() {
-        Purchase purchase = new Purchase();
-        Sale sale = new Sale();
-        System.out.println("清理存活数量为:" + COMPUTER_NUMBER);
-        //要求折价销售
-        sale.offSale();
-        //要求采购人员不要采购
-        purchase.refuseBuyIBM();
+        System.out.println("清理存货数量为： "+COMPUTER_NUMBER);
+        super.mediator.execute("stock.clear");
     }
 }
